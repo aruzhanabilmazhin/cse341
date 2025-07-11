@@ -1,22 +1,19 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
-const contactRoutes = require('./routes/contacts');
-const mongodb = require('./database/database');
+const contactRoutes = require('./routes/contactRoutes'); // Or contacts.js, depending on your file name
+const mongodb = require('./config/db'); // ✅ FIXED this line
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware
 app.use(cors());
 app.use(express.json());
 
-// API routes
 app.use('/api/contacts', contactRoutes);
 
-// Root route (health check)
 app.get('/', (req, res) => {
   res.status(200).json({
     message: 'Contacts API is running',
@@ -25,7 +22,6 @@ app.get('/', (req, res) => {
   });
 });
 
-// Connect to MongoDB and start the server
 mongodb.initDB((err) => {
   if (err) {
     console.error('❌ Failed to connect to MongoDB:', err);
