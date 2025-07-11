@@ -1,0 +1,5 @@
+### Get all contacts
+GET https://your-render-url.onrender.com/contacts
+
+### Get single contact by ID
+GET https://your-render-url.onrender.com/contacts/REPLACE_WITH_CONTACT_ID
